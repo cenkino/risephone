@@ -1,4 +1,7 @@
-﻿namespace ContactService.API.Domain.Entities
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace ContactService.API.Domain.Entities
 {
     public class Contact
     {
@@ -9,7 +12,8 @@
             Company = company;
         }
 
-        
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }

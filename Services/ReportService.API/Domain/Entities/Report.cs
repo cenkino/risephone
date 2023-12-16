@@ -1,4 +1,7 @@
-﻿namespace ReportService.API.Domain.Entities
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace ReportService.API.Domain.Entities
 {
     public class Report
     {
@@ -10,11 +13,12 @@
             Status = status;
         }
 
-        
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        
+        [BsonRepresentation(BsonType.DateTime)]
         public DateTime CreatedDate { get; set; }
-        
+        [BsonRepresentation(BsonType.DateTime)]
         public DateTime? CompletedDate { get; set; }
         public ReportStatus Status { get; set; }
 
