@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportService.API", "Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RisePhoneApp.Shared", "Shared\RisePhoneApp.Shared\RisePhoneApp.Shared.csproj", "{2EDFC01E-72C7-4F26-BA7E-A621F3DF7926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "Public\ApiGateway\ApiGateway.csproj", "{739141E6-9B9A-4757-A535-D27635BE4F94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "Public\ApiGateway\ApiGateway.csproj", "{739141E6-9B9A-4757-A535-D27635BE4F94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Base", "EventBus\EventBus.Base\EventBus.Base.csproj", "{EF9D9186-1421-47F7-9019-078103F1F060}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Factory", "EventBus\EventBus.Factory\EventBus.Factory.csproj", "{046B5B4D-B105-4380-A75B-5030F182528D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.RabbitMQ", "EventBus\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj", "{C37183C7-4C31-44BD-9AE1-530F8A210FA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{739141E6-9B9A-4757-A535-D27635BE4F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{739141E6-9B9A-4757-A535-D27635BE4F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{739141E6-9B9A-4757-A535-D27635BE4F94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9D9186-1421-47F7-9019-078103F1F060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9D9186-1421-47F7-9019-078103F1F060}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9D9186-1421-47F7-9019-078103F1F060}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9D9186-1421-47F7-9019-078103F1F060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{046B5B4D-B105-4380-A75B-5030F182528D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{046B5B4D-B105-4380-A75B-5030F182528D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{046B5B4D-B105-4380-A75B-5030F182528D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{046B5B4D-B105-4380-A75B-5030F182528D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C37183C7-4C31-44BD-9AE1-530F8A210FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C37183C7-4C31-44BD-9AE1-530F8A210FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C37183C7-4C31-44BD-9AE1-530F8A210FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C37183C7-4C31-44BD-9AE1-530F8A210FA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
