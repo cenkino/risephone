@@ -10,6 +10,8 @@ namespace ContactService.API.Mapping
         {
             CreateMap<Contact, ContactVal>().ReverseMap();
             CreateMap<ContactInfo, ContactInfoVal>().ReverseMap();
+            CreateMap<Contact, ContactIndexVal>().ReverseMap();
+            CreateMap<Contact, ContactEditVal>().ReverseMap();
         }
     }
 }

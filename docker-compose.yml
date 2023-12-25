@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: Public/ApiGateway/Dockerfile
+
+  contactservice.api:
+    image: ${DOCKER_REGISTRY-}contactserviceapi
+    build:
+      context: .
+      dockerfile: Services/ContactService.API/Dockerfile
+
+
+  reportservice.api:
+    image: ${DOCKER_REGISTRY-}reportserviceapi
+    build:
+      context: .
+      dockerfile: Services/ReportService.API/Dockerfile
+
+      
+  s_contactdb:
+    container_name: c_contactdb
+    image: mongo
+
+  s_reportdb:
+    container_name: c_reportdb
+    image: mongo
+
+  s_rabbitmq:
+    container_name: c_rabbitmq
+    image: rabbitmq:3-management

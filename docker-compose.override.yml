@@ -1,0 +1,83 @@
+version: '3.4'
+
+services:
+  apigateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+    ports:
+      - "5000:5000"
+    networks:
+      - net_apigateway
+      - net_backendservices
+  contactservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+    ports:
+     - "5001:5001"
+    networks:
+      - net_backendservices
+    depends_on:
+      - apigateway
+      - s_contactdb
+      - s_rabbitmq
+    external_links:
+      - s_contactdb
+      - s_rabbitmq
+
+  reportservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5002
+    ports:
+      - "5002:5002"
+    networks:
+      - net_backendservices
+    depends_on:
+      - apigateway
+      - s_reportdb
+      - s_rabbitmq
+    external_links:
+      - s_reportdb
+      - s_rabbitmq
+
+  s_rabbitmq:
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    networks:
+      - net_backendservices
+      - net_apigateway
+
+
+  s_contactdb:
+    volumes:
+      - mongoDBvolume:/data/contactdb
+    ports:
+      - 27017:27017
+    networks:
+      - net_backendservices
+
+  s_reportdb:
+    volumes:
+      - mongoDBvolume:/data/reportdb
+    ports:
+      - 27018:27017
+    networks:
+      - net_backendservices
+
+networks:
+  net_apigateway:
+    driver: bridge
+    external: true
+  net_backendservices:
+    driver: bridge
+    external: true
+
+volumes:
+  rabbitmq:
+  mongoDBvolume:
+    driver: local
