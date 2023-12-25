@@ -17,11 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Factory", "EventBu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.RabbitMQ", "EventBus\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj", "{C37183C7-4C31-44BD-9AE1-530F8A210FA2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactServiceTest", "Services\Test\ContactServiceTest\ContactServiceTest.csproj", "{39AB1822-6DA1-4B83-99F6-943D2C069861}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportServiceTest", "Services\Test\ReportServiceTest\ReportServiceTest.csproj", "{879A4BB2-27A0-4253-A1A5-68EB8272EF3A}"
+EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{221A4768-7FF1-4EC5-8421-BB23CD55398B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactService.Test", "..\Services\ContactService\Test\ContactService.Test\ContactService.Test.csproj", "{9DC037BD-077A-440D-BD8A-509ABA1F5B84}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportService.Test", "..\Services\ReportService\Test\ReportService.Test\ReportService.Test.csproj", "{FC278390-66C5-4FC6-BF38-B04403377E6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,18 +57,18 @@ Global
 		{C37183C7-4C31-44BD-9AE1-530F8A210FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C37183C7-4C31-44BD-9AE1-530F8A210FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C37183C7-4C31-44BD-9AE1-530F8A210FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39AB1822-6DA1-4B83-99F6-943D2C069861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39AB1822-6DA1-4B83-99F6-943D2C069861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39AB1822-6DA1-4B83-99F6-943D2C069861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39AB1822-6DA1-4B83-99F6-943D2C069861}.Release|Any CPU.Build.0 = Release|Any CPU
+		{879A4BB2-27A0-4253-A1A5-68EB8272EF3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{879A4BB2-27A0-4253-A1A5-68EB8272EF3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{879A4BB2-27A0-4253-A1A5-68EB8272EF3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{879A4BB2-27A0-4253-A1A5-68EB8272EF3A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{221A4768-7FF1-4EC5-8421-BB23CD55398B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{221A4768-7FF1-4EC5-8421-BB23CD55398B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{221A4768-7FF1-4EC5-8421-BB23CD55398B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{221A4768-7FF1-4EC5-8421-BB23CD55398B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DC037BD-077A-440D-BD8A-509ABA1F5B84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DC037BD-077A-440D-BD8A-509ABA1F5B84}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DC037BD-077A-440D-BD8A-509ABA1F5B84}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DC037BD-077A-440D-BD8A-509ABA1F5B84}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FC278390-66C5-4FC6-BF38-B04403377E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC278390-66C5-4FC6-BF38-B04403377E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC278390-66C5-4FC6-BF38-B04403377E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC278390-66C5-4FC6-BF38-B04403377E6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
