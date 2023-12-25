@@ -10,10 +10,13 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="MongoDB.Bson" Version="2.23.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.23.1" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EventBus\EventBus.Base\EventBus.Base.csproj" />
+    <ProjectReference Include="..\..\EventBus\EventBus.Factory\EventBus.Factory.csproj" />
     <ProjectReference Include="..\..\Shared\RisePhoneApp.Shared\RisePhoneApp.Shared.csproj" />
   </ItemGroup>
 
