@@ -1,27 +1,27 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using EventBus.Base.Abstraction;
 using Microsoft.AspNetCore.Mvc;
-using ReportService.API.Domain.Entities;
 using ReportService.API.Infrastructure.Repository;
+using ReportService.API.IntegrationEvents.Events;
 using ReportService.API.Models;
 using RisePhoneApp.Shared.Models.ResponseModels;
 using System.Net;
 
-namespace ReportService.API
+namespace ReportService.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class ReportsController : ControllerBase
     {
         private readonly IReportRepository _repository;
         private readonly IMapper _mapper;
-        
+        private readonly IEventBus _eventBus;
 
-        public ReportsController(IReportRepository repository, IMapper mapper)
+        public ReportsController(IReportRepository repository, IMapper mapper, IEventBus eventBus)
         {
             _repository = repository;
             _mapper = mapper;
-            
+            _eventBus = eventBus;
         }
 
         [HttpGet]
@@ -48,7 +48,8 @@ namespace ReportService.API
 
             if (newReport == null) return BadRequest();
 
-            
+            var reportStartedEventModel = new ReportStartedIntegrationEvent(newReport.Id);
+            _eventBus.Publish(reportStartedEventModel);
 
             var result = new ResultId<string> { Id = newReport.Id };
             return CustomResponse<ResultId<string>>.Success(result, (int)HttpStatusCode.Created);
