@@ -18,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ReportService.API\ReportService.API.csproj" />
+	  
+    <ProjectReference Include="..\..\src\Services\ReportService.API\ReportService.API.csproj" />
   </ItemGroup>
 
   

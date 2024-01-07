@@ -3,23 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactService.API", "Services\ContactService.API\ContactService.API.csproj", "{FDE247E5-79BD-4ABC-9773-6B1802C1308F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactService.API", "src\Services\ContactService.API\ContactService.API.csproj", "{FDE247E5-79BD-4ABC-9773-6B1802C1308F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportService.API", "Services\ReportService.API\ReportService.API.csproj", "{FE126E24-7E52-4DB8-B309-71BFD966733F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportService.API", "src\Services\ReportService.API\ReportService.API.csproj", "{FE126E24-7E52-4DB8-B309-71BFD966733F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RisePhoneApp.Shared", "Shared\RisePhoneApp.Shared\RisePhoneApp.Shared.csproj", "{2EDFC01E-72C7-4F26-BA7E-A621F3DF7926}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RisePhoneApp.Shared", "src\Shared\RisePhoneApp.Shared\RisePhoneApp.Shared.csproj", "{2EDFC01E-72C7-4F26-BA7E-A621F3DF7926}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "Public\ApiGateway\ApiGateway.csproj", "{739141E6-9B9A-4757-A535-D27635BE4F94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "src\Public\ApiGateway\ApiGateway.csproj", "{739141E6-9B9A-4757-A535-D27635BE4F94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Base", "EventBus\EventBus.Base\EventBus.Base.csproj", "{EF9D9186-1421-47F7-9019-078103F1F060}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Base", "src\EventBus\EventBus.Base\EventBus.Base.csproj", "{EF9D9186-1421-47F7-9019-078103F1F060}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Factory", "EventBus\EventBus.Factory\EventBus.Factory.csproj", "{046B5B4D-B105-4380-A75B-5030F182528D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Factory", "src\EventBus\EventBus.Factory\EventBus.Factory.csproj", "{046B5B4D-B105-4380-A75B-5030F182528D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.RabbitMQ", "EventBus\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj", "{C37183C7-4C31-44BD-9AE1-530F8A210FA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.RabbitMQ", "src\EventBus\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj", "{C37183C7-4C31-44BD-9AE1-530F8A210FA2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactServiceTest", "Services\Test\ContactServiceTest\ContactServiceTest.csproj", "{39AB1822-6DA1-4B83-99F6-943D2C069861}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactServiceTest", "Test\ContactServiceTest\ContactServiceTest.csproj", "{39AB1822-6DA1-4B83-99F6-943D2C069861}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportServiceTest", "Services\Test\ReportServiceTest\ReportServiceTest.csproj", "{879A4BB2-27A0-4253-A1A5-68EB8272EF3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportServiceTest", "Test\ReportServiceTest\ReportServiceTest.csproj", "{879A4BB2-27A0-4253-A1A5-68EB8272EF3A}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{221A4768-7FF1-4EC5-8421-BB23CD55398B}"
 EndProject
