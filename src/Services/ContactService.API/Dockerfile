@@ -8,14 +8,14 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Services/ContactService.API/ContactService.API.csproj", "Services/ContactService.API/"]
-COPY ["EventBus/EventBus.Base/EventBus.Base.csproj", "EventBus/EventBus.Base/"]
-COPY ["EventBus/EventBus.Factory/EventBus.Factory.csproj", "EventBus/EventBus.Factory/"]
-COPY ["EventBus/EventBus.RabbitMQ/EventBus.RabbitMQ.csproj", "EventBus/EventBus.RabbitMQ/"]
-COPY ["Shared/RisePhoneApp.Shared/RisePhoneApp.Shared.csproj", "Shared/RisePhoneApp.Shared/"]
-RUN dotnet restore "./Services/ContactService.API/./ContactService.API.csproj"
+COPY ["src/Services/ContactService.API/ContactService.API.csproj", "src/Services/ContactService.API/"]
+COPY ["src/EventBus/EventBus.Base/EventBus.Base.csproj", "src/EventBus/EventBus.Base/"]
+COPY ["src/EventBus/EventBus.Factory/EventBus.Factory.csproj", "src/EventBus/EventBus.Factory/"]
+COPY ["src/EventBus/EventBus.RabbitMQ/EventBus.RabbitMQ.csproj", "src/EventBus/EventBus.RabbitMQ/"]
+COPY ["src/Shared/RisePhoneApp.Shared/RisePhoneApp.Shared.csproj", "src/Shared/RisePhoneApp.Shared/"]
+RUN dotnet restore "./src/Services/ContactService.API/./ContactService.API.csproj"
 COPY . .
-WORKDIR "/src/Services/ContactService.API"
+WORKDIR "/src/src/Services/ContactService.API"
 RUN dotnet build "./ContactService.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

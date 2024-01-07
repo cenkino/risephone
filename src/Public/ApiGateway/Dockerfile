@@ -2,17 +2,18 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 5000
-
+EXPOSE 80
+EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Public/ApiGateway/ApiGateway.csproj", "Public/ApiGateway/"]
-#COPY ["Shared/RisePhoneApp.Shared/RisePhoneApp.Shared.csproj", "Shared/RisePhoneApp.Shared/"]
-RUN dotnet restore "./Public/ApiGateway/./ApiGateway.csproj"
+COPY ["src/Public/ApiGateway/ApiGateway.csproj", "src/Public/ApiGateway/"]
+COPY ["src/Shared/RisePhoneApp.Shared/RisePhoneApp.Shared.csproj", "src/Shared/RisePhoneApp.Shared/"]
+COPY ["src/EventBus/EventBus.Base/EventBus.Base.csproj", "src/EventBus/EventBus.Base/"]
+RUN dotnet restore "./src/Public/ApiGateway/./ApiGateway.csproj"
 COPY . .
-WORKDIR "/src/Public/ApiGateway"
+WORKDIR "/src/src/Public/ApiGateway"
 RUN dotnet build "./ApiGateway.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

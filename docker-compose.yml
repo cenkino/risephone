@@ -5,22 +5,24 @@ services:
     image: ${DOCKER_REGISTRY-}apigateway
     build:
       context: .
-      dockerfile: Public/ApiGateway/Dockerfile
+      dockerfile: src/Public/ApiGateway/Dockerfile
 
   contactservice.api:
     image: ${DOCKER_REGISTRY-}contactserviceapi
     build:
       context: .
-      dockerfile: Services/ContactService.API/Dockerfile
+      dockerfile: src/Services/ContactService.API/Dockerfile
 
 
   reportservice.api:
     image: ${DOCKER_REGISTRY-}reportserviceapi
     build:
       context: .
-      dockerfile: Services/ReportService.API/Dockerfile
+      dockerfile: src/Services/ReportService.API/Dockerfile
 
-      
+
+
+
   s_contactdb:
     container_name: c_contactdb
     image: mongo
