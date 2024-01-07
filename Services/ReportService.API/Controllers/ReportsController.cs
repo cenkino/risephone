@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ReportService.API.Infrastructure.Repository;
 using ReportService.API.IntegrationEvents.Events;
 using ReportService.API.Models;
+using RisePhoneApp.Shared.Core.Base;
 using RisePhoneApp.Shared.Models.ResponseModels;
 using System.Net;
 
@@ -11,16 +12,13 @@ namespace ReportService.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ReportsController : ControllerBase
+    public class ReportsController : BaseController<IReportRepository>
     {
-        private readonly IReportRepository _repository;
-        private readonly IMapper _mapper;
         private readonly IEventBus _eventBus;
+        
 
-        public ReportsController(IReportRepository repository, IMapper mapper, IEventBus eventBus)
+        public ReportsController(IReportRepository repository, IMapper mapper,IEventBus eventBus) : base(repository, mapper)
         {
-            _repository = repository;
-            _mapper = mapper;
             _eventBus = eventBus;
         }
 

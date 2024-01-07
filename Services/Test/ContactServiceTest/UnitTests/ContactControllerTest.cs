@@ -4,8 +4,10 @@ using ContactService.API.Domain.Entities;
 using ContactService.API.Infrastructure.Repository;
 using ContactService.API.Mapping;
 using ContactService.API.Models;
+using EventBus.Base.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using RisePhoneApp.Shared.Core.Base;
 using RisePhoneApp.Shared.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
@@ -17,30 +19,20 @@ using Xunit;
 
 namespace ContactServiceTest.UnitTests
 {
-    public class ContactsControllerTest
+    public class ContactsControllerTest:BaseMock<IContactRepository,ContactsController,GeneralMapping>
     {
-        private readonly Mock<IContactRepository> _contactRepositoryMock;
-        private readonly IMapper _mapper;
-        private readonly ContactsController _contactController;
+       
 
-        public ContactsControllerTest()
-        {
-            _contactRepositoryMock = new Mock<IContactRepository>();
-
-            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<GeneralMapping>()).CreateMapper();
-
-            _contactController = new ContactsController(_contactRepositoryMock.Object, _mapper);
-        }
 
         [Fact]
         public async Task Get_all_contact_infos_OK()
         {
             //Arrange
-            _contactRepositoryMock.Setup(x => x.GetAllContactInfosAsync())
+            RepositoryM.Setup(x => x.GetAllContactInfosAsync())
               .Returns(Task.FromResult(GetContactInfosFake("907f1f77bcf86cd799439046")));
 
             //Act
-            var actionResult = await _contactController.GetAllContactInfos();
+            var actionResult = await ControllerM.GetAllContactInfos();
 
             //Assert
             var objectResult = (ObjectResult)actionResult;
@@ -53,11 +45,11 @@ namespace ContactServiceTest.UnitTests
         public async Task Get_all_contacts_OK()
         {
             //Arrange
-            _contactRepositoryMock.Setup(x => x.GetAllContactsAsync())
+            RepositoryM.Setup(x => x.GetAllContactsAsync())
               .Returns(Task.FromResult(GetContactsFake()));
 
             //Act
-            var actionResult = await _contactController.GetAllContacts();
+            var actionResult = await ControllerM.GetAllContacts();
 
             //Assert
             var objectResult = (ObjectResult)actionResult;
@@ -72,11 +64,11 @@ namespace ContactServiceTest.UnitTests
             //Arrange
             var fakeContactId = "887f1f77bcf86cd799439092";
 
-            _contactRepositoryMock.Setup(x => x.GetContactByIdAsync(It.IsAny<string>()))
+            RepositoryM.Setup(x => x.GetContactByIdAsync(It.IsAny<string>()))
               .Returns(Task.FromResult(GetContactById(fakeContactId)));
 
             //Act
-            var actionResult = await _contactController.GetContactByIdAsync(fakeContactId);
+            var actionResult = await ControllerM.GetContactByIdAsync(fakeContactId);
 
             //Assert
             var objectResult = (ObjectResult)actionResult;
@@ -94,11 +86,11 @@ namespace ContactServiceTest.UnitTests
             //Arrange
             var fakeContactId = "150f1f77bcf86cd799439092";
 
-            _contactRepositoryMock.Setup(x => x.GetContactByIdAsync(It.IsAny<string>()))
+            RepositoryM.Setup(x => x.GetContactByIdAsync(It.IsAny<string>()))
               .Returns(Task.FromResult(GetContactById(fakeContactId)));
 
             //Act
-            var actionResult = await _contactController.GetContactByIdAsync(fakeContactId);
+            var actionResult = await ControllerM.GetContactByIdAsync(fakeContactId);
 
             //Assert
             var objectResult = (NotFoundResult)actionResult;
@@ -112,13 +104,13 @@ namespace ContactServiceTest.UnitTests
             //Arrange
             var fakeContactId = "887f1f77bcf86cd799439092";
             var fakeContact = GetContactById(fakeContactId);
-            var model = _mapper.Map<ContactEditVal>(fakeContact);
+            var model = MapperM.Map<ContactEditVal>(fakeContact);
 
-            _contactRepositoryMock.Setup(x => x.CreateContactAsync(It.IsAny<Contact>()))
+            RepositoryM.Setup(x => x.CreateContactAsync(It.IsAny<Contact>()))
               .Returns(Task.FromResult(fakeContact));
 
             //Act
-            var actionResult = await _contactController.CreateContactAsync(model);
+            var actionResult = await ControllerM.CreateContactAsync(model);
 
             //Assert
             var objectResult = (ObjectResult)actionResult;
@@ -156,13 +148,13 @@ namespace ContactServiceTest.UnitTests
             //Arrange
             var fakeContactInfoId = "507f1f77bcf86cd799439011";
             var fakeContactInfo = GetContactInfoById(fakeContactInfoId);
-            var model = _mapper.Map<ContactInfoVal>(fakeContactInfo);
+            var model = MapperM.Map<ContactInfoVal>(fakeContactInfo);
 
-            _contactRepositoryMock.Setup(x => x.CreateContactInfoAsync(It.IsAny<ContactInfo>()))
+            RepositoryM.Setup(x => x.CreateContactInfoAsync(It.IsAny<ContactInfo>()))
               .Returns(Task.FromResult(fakeContactInfo));
 
             //Act
-            var actionResult = await _contactController.CreateContactInfoAsync(model);
+            var actionResult = await ControllerM.CreateContactInfoAsync(model);
 
             //Assert
             var objectResult = (ObjectResult)actionResult;
@@ -200,11 +192,11 @@ namespace ContactServiceTest.UnitTests
         public async Task Delete_contact_OK()
         {
             //Arrange
-            _contactRepositoryMock.Setup(x => x.DeleteContactAsync(It.IsAny<string>()))
+            RepositoryM.Setup(x => x.DeleteContactAsync(It.IsAny<string>()))
               .Returns(Task.FromResult(true));
 
             //Act
-            var actionResult = await _contactController.DeleteContactByIdAsync("887f1f77bcf86cd799439092");
+            var actionResult = await ControllerM.DeleteContactByIdAsync("887f1f77bcf86cd799439092");
 
             //Assert
             var objectResult = (OkResult)actionResult;
@@ -216,11 +208,11 @@ namespace ContactServiceTest.UnitTests
         public async Task Delete_contact_bad_request()
         {
             //Arrange
-            _contactRepositoryMock.Setup(x => x.DeleteContactAsync(It.IsAny<string>()))
+            RepositoryM.Setup(x => x.DeleteContactAsync(It.IsAny<string>()))
               .Returns(Task.FromResult(false));
 
             //Act
-            var actionResult = await _contactController.DeleteContactByIdAsync("887f1f77bcf86cd799439092");
+            var actionResult = await ControllerM.DeleteContactByIdAsync("887f1f77bcf86cd799439092");
 
             //Assert
             var objectResult = (BadRequestResult)actionResult;
@@ -232,11 +224,11 @@ namespace ContactServiceTest.UnitTests
         public async Task Delete_contact_info_OK()
         {
             //Arrange
-            _contactRepositoryMock.Setup(x => x.DeleteContactInfoAsync(It.IsAny<string>()))
+            RepositoryM.Setup(x => x.DeleteContactInfoAsync(It.IsAny<string>()))
               .Returns(Task.FromResult(true));
 
             //Act
-            var actionResult = await _contactController.DeleteContactInfoByIdAsync("236f1f77bcf86cd799439092");
+            var actionResult = await ControllerM.DeleteContactInfoByIdAsync("236f1f77bcf86cd799439092");
 
             //Assert
             var objectResult = (OkResult)actionResult;
@@ -248,11 +240,11 @@ namespace ContactServiceTest.UnitTests
         public async Task Delete_contact_info_bad_request()
         {
             //Arrange
-            _contactRepositoryMock.Setup(x => x.DeleteContactInfoAsync(It.IsAny<string>()))
+            RepositoryM.Setup(x => x.DeleteContactInfoAsync(It.IsAny<string>()))
               .Returns(Task.FromResult(false));
 
             //Act
-            var actionResult = await _contactController.DeleteContactInfoByIdAsync("236f1f77bcf86cd799439092");
+            var actionResult = await ControllerM.DeleteContactInfoByIdAsync("236f1f77bcf86cd799439092");
 
             //Assert
             var objectResult = (BadRequestResult)actionResult;

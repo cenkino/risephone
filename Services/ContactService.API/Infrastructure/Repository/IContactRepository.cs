@@ -1,8 +1,9 @@
 ﻿using ContactService.API.Domain.Entities;
+using RisePhoneApp.Shared.Core.Base;
 
 namespace ContactService.API.Infrastructure.Repository
 {
-    public interface IContactRepository
+    public interface IContactRepository:IBaseRepository
     {
         Task<bool> GetContactsHasDocumentForDummyDataAsync();
         Task<IList<Contact>> GetAllContactsAsync();

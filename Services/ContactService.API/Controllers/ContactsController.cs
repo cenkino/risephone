@@ -2,8 +2,10 @@
 using ContactService.API.Domain.Entities;
 using ContactService.API.Infrastructure.Repository;
 using ContactService.API.Models;
+using EventBus.Base.Abstraction;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RisePhoneApp.Shared.Core.Base;
 using RisePhoneApp.Shared.Models.ResponseModels;
 using System.Net;
 
@@ -11,15 +13,11 @@ namespace ContactService.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContactsController : ControllerBase
+    public class ContactsController : BaseController<IContactRepository>
     {
-        private readonly IContactRepository _repository;
-        private readonly IMapper _mapper;
-
-        public ContactsController(IContactRepository repository, IMapper mapper)
+        public ContactsController(IContactRepository repository, IMapper mapper) : base(repository, mapper)
         {
-            _repository = repository;
-            _mapper = mapper;
+          
         }
 
         [HttpGet("infos")]

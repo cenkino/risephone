@@ -8,6 +8,7 @@ using ReportService.API.Infrastructure.Repository;
 using ReportService.API.IntegrationEvents.Events;
 using ReportService.API.Mapping;
 using ReportService.API.Models;
+using RisePhoneApp.Shared.Core.Base;
 using RisePhoneApp.Shared.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
@@ -18,32 +19,25 @@ using Xunit;
 
 namespace ReportServiceTest.UnitTests
 {
-    public class ReportsControllerTest
+    public class ReportsControllerTest:BaseMock<IReportRepository,ReportsController,GeneralMapping>
     {
-        private readonly Mock<IReportRepository> _reportRepositoryMock;
-        private readonly IMapper _mapper;
+
         private readonly Mock<IEventBus> _serviceBusMock;
-        private readonly ReportsController _reportController;
 
-        public ReportsControllerTest()
+        public ReportsControllerTest():base(new Mock<IEventBus>().Object) 
         {
-            _reportRepositoryMock = new Mock<IReportRepository>();
             _serviceBusMock = new Mock<IEventBus>();
-
-            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<GeneralMapping>()).CreateMapper();
-
-            _reportController = new ReportsController(_reportRepositoryMock.Object, _mapper, _serviceBusMock.Object);
         }
 
         [Fact]
         public async Task Get_all_reports_OK()
         {
             //Arrange
-            _reportRepositoryMock.Setup(x => x.GetAllReportsAsync())
+            RepositoryM.Setup(x => x.GetAllReportsAsync())
               .Returns(Task.FromResult(GetReportsFake()));
 
             //Act
-            var actionResult = await _reportController.GetAllReports();
+            var actionResult = await ControllerM.GetAllReports();
 
             //Assert
             var objectResult = (ObjectResult)actionResult;
@@ -59,13 +53,13 @@ namespace ReportServiceTest.UnitTests
             var fakeReportId = "887f1f77bcf86cd799439092";
             var fakeReport = GetReportById(fakeReportId);
 
-            _reportRepositoryMock.Setup(x => x.CreateReportAsync())
+            RepositoryM.Setup(x => x.CreateReportAsync())
               .Returns(Task.FromResult(fakeReport));
 
             _serviceBusMock.Setup(x => x.Publish(It.IsAny<ReportStartedIntegrationEvent>()));
 
             //Act
-            var actionResult = await _reportController.CreateReportAsync();
+            var actionResult = await ControllerM.CreateReportAsync();
 
             //Assert
             var objectResult = (ObjectResult)actionResult;
@@ -81,11 +75,11 @@ namespace ReportServiceTest.UnitTests
         public async Task Create_report_repository_return_null()
         {
             //Arrange
-            _reportRepositoryMock.Setup(x => x.CreateReportAsync())
+            RepositoryM.Setup(x => x.CreateReportAsync())
               .Returns(Task.FromResult((Report?)null));
 
             //Act
-            var actionResult = await _reportController.CreateReportAsync();
+            var actionResult = await ControllerM.CreateReportAsync();
 
             //Assert
             var objectResult = (BadRequestResult)actionResult;
@@ -99,11 +93,11 @@ namespace ReportServiceTest.UnitTests
             //Arrange
             var fakeReportId = "887f1f77bcf86cd799439092";
 
-            _reportRepositoryMock.Setup(x => x.GetReportByIdAsync(It.IsAny<string>()))
+            RepositoryM.Setup(x => x.GetReportByIdAsync(It.IsAny<string>()))
               .Returns(Task.FromResult(GetReportById(fakeReportId)));
 
             //Act
-            var actionResult = await _reportController.GetReportByIdAsync(fakeReportId);
+            var actionResult = await ControllerM.GetReportByIdAsync(fakeReportId);
 
             //Assert
             var objectResult = (ObjectResult)actionResult;
@@ -121,11 +115,11 @@ namespace ReportServiceTest.UnitTests
             //Arrange
             var fakeReportId = "150f1f77bcf86cd799439092";
 
-            _reportRepositoryMock.Setup(x => x.GetReportByIdAsync(It.IsAny<string>()))
+                RepositoryM.Setup(x => x.GetReportByIdAsync(It.IsAny<string>()))
               .Returns(Task.FromResult((Report?)null));
 
             //Act
-            var actionResult = await _reportController.GetReportByIdAsync(fakeReportId);
+            var actionResult = await ControllerM.GetReportByIdAsync(fakeReportId);
 
             //Assert
             var objectResult = (NotFoundResult)actionResult;
