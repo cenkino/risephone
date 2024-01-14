@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ContactService.API.Domain.Entities;
 using ContactService.API.Infrastructure.Repository;
+using ContactService.API.IntegrationEvents.Events;
 using ContactService.API.Models;
 using EventBus.Base.Abstraction;
 using Microsoft.AspNetCore.Http;
@@ -120,6 +121,50 @@ namespace ContactService.API.Controllers
             var result = await _repository.DeleteContactInfoAsync(id);
 
             return result ? Ok() : BadRequest();
+        }
+
+
+        [HttpPost("CreateContactReport")]
+        [ProducesResponseType(typeof(CustomResponse<ReportCreatedIntegrationEvent>), (int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> CreateContactReport([FromBody] ReportStartedIntegrationEvent req)
+        {
+
+
+            var resultModel = new ReportCreatedIntegrationEvent(req.ReportId);
+
+            var contactInfos = await _repository.GetAllContactInfosAsync();
+            if (contactInfos == null || !contactInfos.Any())
+            {
+                
+                return BadRequest();
+            }
+
+            var locations = contactInfos.Where(x => x.InfoType == ContactInfo.ContactInfoType.Location);
+            if (locations == null || !locations.Any())
+            {
+                
+                return BadRequest();
+            }
+
+            var distinctLocations = locations.Select(x => x.Value).Distinct();
+            foreach (var location in distinctLocations)
+            {
+                var contacts = locations
+                  .Where(x => x.Value == location)
+                  .Select(x => x.ContactId)
+                  .Distinct();
+
+                var phoneNumbers = contactInfos
+                  .Where(x => x.InfoType == ContactInfo.ContactInfoType.Phone && contacts.Contains(x.ContactId))
+                  .Select(x => x.Value)
+                  .Distinct()
+                  .Count();
+
+                resultModel.AddDetail(location, contacts.Count(), phoneNumbers);
+            }
+
+           return  CustomResponse<ReportCreatedIntegrationEvent>.Success(resultModel, (int)HttpStatusCode.Created);
         }
 
     }

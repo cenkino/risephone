@@ -4,7 +4,7 @@ namespace ContactService.API.Models
 {
     public class ContactEditVal:IValidatableObject
     {
-        public string Id { get; set; }
+        public string? Id { get; set; } = null;
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Company { get; set; }

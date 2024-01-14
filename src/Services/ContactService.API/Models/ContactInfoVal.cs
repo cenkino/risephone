@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static ContactService.API.Domain.Entities.ContactInfo;
 
 namespace ContactService.API.Models
 {
     public class ContactInfoVal:IValidatableObject
     {
-        public string Id { get; set; }
+        public string? Id { get; set; } = null;
         public string ContactId { get; set; }
         public int InfoType { get; set; }
         public string Value { get; set; }
