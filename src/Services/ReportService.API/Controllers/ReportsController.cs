@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EventBus.Base.Abstraction;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using ReportService.API.Infrastructure.Repository;
 using ReportService.API.IntegrationEvents.Events;
 using ReportService.API.Models;
@@ -73,6 +74,43 @@ namespace ReportService.API.Controllers
             }
 
             return CustomResponse<ReportVal>.Success(model, (int)HttpStatusCode.OK);
+        }
+
+
+
+        [HttpPost("CreateReportWithRest")]
+        [ProducesResponseType(typeof(CustomResponse<ResultId<string>>), (int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> CreateReportWithRest()
+        {
+            var newReport = await _repository.CreateReportAsync();
+
+            if (newReport == null) return BadRequest();
+
+            var reportStartedEventModel = new ReportStartedIntegrationEvent(newReport.Id);
+            
+            
+
+
+                using (HttpClient client = new HttpClient())
+                {
+
+                string url = "http://localhost:5000/Contacts/CreateContactReport";
+
+
+
+                    string jsonContent = JsonConvert.SerializeObject(reportStartedEventModel);
+                    var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+                   
+                    HttpResponseMessage response = await client.PostAsync(url, content);
+
+
+
+            }
+
+            var result = new ResultId<string> { Id = newReport.Id };
+            return CustomResponse<ResultId<string>>.Success(result, (int)HttpStatusCode.Created);
         }
 
     }

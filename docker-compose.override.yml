@@ -4,7 +4,7 @@ services:
   apigateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5000
+      - ASPNETCORE_URLS=http://host.docker.internal:5000
     ports:
       - "5000:5000"
     networks:
@@ -15,7 +15,7 @@ services:
   contactservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5001
+      - ASPNETCORE_URLS=http://host.docker.internal:5001
     ports:
      - "5001:5001"
     networks:
@@ -24,23 +24,17 @@ services:
       - apigateway
       - s_contactdb
       - s_rabbitmq
-    external_links:
-      - s_contactdb
-      - s_rabbitmq
 
   reportservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5002
+      - ASPNETCORE_URLS=http://host.docker.internal:5002
     ports:
       - "5002:5002"
     networks:
       - net_backendservices
     depends_on:
       - apigateway
-      - s_reportdb
-      - s_rabbitmq
-    external_links:
       - s_reportdb
       - s_rabbitmq
 
@@ -76,11 +70,7 @@ services:
 
 networks:
   net_apigateway:
-    driver: bridge
-    external: true
   net_backendservices:
-    driver: bridge
-    external: true
 
 volumes:
   rabbitmq:
